@@ -1,0 +1,15 @@
+# mineleng博客 - Full Content Archive
+
+> Generated on 2026-09-09. Contains full text of all public articles for LLM ingestion.
+
+---
+
+## 我的第一篇文章
+
+- **URL**: https://mcleng.cn/posts/hello_world/
+- **Published**: 2026-08-26
+- **Category**: 写作
+- **Tags**: Astro, 随笔
+- **Description**: 显示在文章列表和元数据中的简短摘要。
+
+你好世界

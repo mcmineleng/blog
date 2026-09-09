@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>mineleng博客</title><description>一个初三牲的博客</description><link>https://mcleng.cn/</link><language>zh_CN</language><item><title>我的第一篇文章</title><link>https://mcleng.cn/posts/hello_world/</link><guid isPermaLink="true">https://mcleng.cn/posts/hello_world/</guid><description>显示在文章列表和元数据中的简短摘要。</description><pubDate>Wed, 26 Aug 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;你好世界&lt;/p&gt;
+</content:encoded></item></channel></rss>

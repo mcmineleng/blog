@@ -1,0 +1,16 @@
+# mineleng博客
+
+> 一个初三牲的博客
+
+This is the llms.txt file for mineleng博客. It provides a machine-readable directory of published articles and core pages for Large Language Models.
+
+## Core Pages
+- [Home](https://mcleng.cn/): Main blog entrance and latest post stream.
+- [About](https://mcleng.cn/about/): Author profile, technical stack, and background.
+- [Archive](https://mcleng.cn/archive/): Chronological index of all published writings.
+
+## Articles
+- [我的第一篇文章](https://mcleng.cn/posts/hello_world/): 显示在文章列表和元数据中的简短摘要。
+
+## Full Text Dump
+- [Full Text Archive](https://mcleng.cn/llms-full.txt): Complete, concatenated Markdown content of all public articles for full-context ingestion.

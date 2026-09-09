@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh_CN">
+  <title>mineleng博客</title>
+  <subtitle>一个初三牲的博客</subtitle>
+  <link href="https://mcleng.cn/" rel="alternate" type="text/html"/>
+  <link href="https://mcleng.cn/atom.xml" rel="self" type="application/atom+xml"/>
+  <id>https://mcleng.cn/</id>
+  <updated>2026-08-26T00:00:00.000Z</updated>
+  <entry>
+    <title>我的第一篇文章</title>
+    <link href="https://mcleng.cn/posts/hello_world/" rel="alternate" type="text/html"/>
+    <id>https://mcleng.cn/posts/hello_world/</id>
+    <published>2026-08-26T00:00:00.000Z</published>
+    <updated>2026-08-26T00:00:00.000Z</updated>
+    <summary>显示在文章列表和元数据中的简短摘要。</summary>
+    <content type="html"><![CDATA[<p>你好世界</p>
+]]></content>
+    <author><name>mineleng博客</name></author>
+    <category term="写作"/>
+  </entry>
+</feed>
