@@ -1,0 +1,1 @@
+import"./translation.D00KOAN5.js";function r(t,a){if(Number.isNaN(t.getTime()))throw new Error(`${a} must be a valid date.`)}function n(t){return r(t,"Calendar date"),`${t.getUTCFullYear()}-${String(t.getUTCMonth()+1).padStart(2,"0")}-${String(t.getUTCDate()).padStart(2,"0")}`}export{n as t};
