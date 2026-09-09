@@ -11,6 +11,7 @@ This is the llms.txt file for mineleng博客. It provides a machine-readable dir
 
 ## Articles
 - [你好，世界！](https://mcleng.cn/posts/hello_world/): Hello,world !
+- [Linux为何没有C盘](https://mcleng.cn/posts/linux/linux-why-no-c-disk/): Linux硬盘管理的方式
 
 ## Full Text Dump
 - [Full Text Archive](https://mcleng.cn/llms-full.txt): Complete, concatenated Markdown content of all public articles for full-context ingestion.

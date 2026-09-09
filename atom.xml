@@ -18,4 +18,105 @@
     <author><name>mineleng博客</name></author>
     <category term="推荐"/>
   </entry>
+  <entry>
+    <title>Linux为何没有C盘</title>
+    <link href="https://mcleng.cn/posts/linux/linux-why-no-c-disk/" rel="alternate" type="text/html"/>
+    <id>https://mcleng.cn/posts/linux/linux-why-no-c-disk/</id>
+    <published>2026-09-10T00:00:00.000Z</published>
+    <updated>2026-09-10T00:00:00.000Z</updated>
+    <summary>Linux硬盘管理的方式</summary>
+    <content type="html"><![CDATA[<h1>Linux为何没有C盘</h1>
+<blockquote>
+<p>你是不是也觉得，电脑天生就该有C盘、D盘？其实，这只是Windows给你的错觉。</p>
+</blockquote>
+<h2>1. Windows 是怎么管理硬盘的？</h2>
+<p>在聊 Linux 之前，先回忆一下 Windows 是怎么管理硬盘的。</p>
+<p>你买一台新电脑，打开"此电脑"，看到 <strong>C 盘</strong>、<strong>D 盘</strong>，可能还有个 <strong>E 盘</strong>。每个盘有自己的容量、自己的文件，互不干扰。你往 <strong>C 盘</strong>装系统，往 <strong>D 盘</strong>存电影，往 <strong>E 盘</strong>放游戏——清清楚楚。</p>
+<p>这套方式太深入人心了，以至于很多人默认"电脑就该是这样"。</p>
+<p>但你可能没想过一个问题：<strong>电脑真的该是这样吗？</strong> 其实不是的。至少...... Linux不这么认为</p>
+<hr />
+<h2>2. Linux 是怎么管理硬盘的？</h2>
+<h3>2.1 设备文件</h3>
+<p>Linux中没有 <strong>盘符</strong> 的概念，所有硬盘都是 <code>/dev</code> 下的一个 <strong>设备文件</strong>：</p>
+<ul>
+<li>SATA/SAS硬盘通常在 <code>/dev/sdX</code></li>
+<li>NVMe硬盘通常在 <code>/dev/nvmeX</code></li>
+<li>虚拟机磁盘通常在 <code>/dev/vdX</code></li>
+</ul>
+<h3>2.2 为何没有C盘？</h3>
+<p>因为Linux使用设备文件而非盘符管理硬盘。Windows用盘符给每块硬盘分配一个独立的"入口"，而Linux把所有设备都挂到同一棵目录树下。</p>
+<p>你看到的 <code>/</code>、<code>/home</code>、<code>/data1</code> 可能来自完全不同的硬盘，但对用户来说，它们只是路径——没有C，没有D，只有 <code>/</code>。</p>
+<p>你在Linux里 <code>cd /home</code> 和 <code>cd /data1</code>，感受不到它们可能来自两块完全不同的物理硬盘——<strong>这就是设计意图</strong>。</p>
+<hr />
+<h2>3. 挂载硬盘</h2>
+<p>Linux不像Windows一样开机默认挂载所有可挂载的硬盘。如果想使用硬盘，你需要<strong>挂载</strong>：</p>
+<pre><code>mount &lt;device&gt; &lt;dir&gt;
+</code></pre>
+<p><code>&lt;device&gt;</code> 表示设备文件的路径，通常是分区的设备文件。使用 <code>lsblk</code> 查看所有硬盘的分区：</p>
+<pre><code>NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda           8:0    0  256G  0 disk
+├─sda1        8:1    0    1G  0 part /boot/efi
+└─sda2        8:2    0  255G  0 part /
+nvme0n1     259:0    0  256G  0 disk
+├─nvme0n1p1 259:1    0    1G  0 part 
+└─nvme0n1p2 259:2    0  255G  0 part
+</code></pre>
+<p>挂载示例：</p>
+<pre><code>sudo mount /dev/nvme0n1p1 /mnt
+</code></pre>
+<blockquote>
+<p><strong>注意</strong>：必须用 <code>sudo</code>，普通用户无法挂载硬盘。</p>
+</blockquote>
+<hr />
+<h2>4. Linux 自动挂载硬盘</h2>
+<p>使用 <code>mount</code> 命令挂载无法持久化，重启就会丢失，所以我们需要<strong>开机自动挂载</strong>。</p>
+<h3>4.1 SysVinit 方式（/etc/fstab）</h3>
+<p>传统的 <code>SysVinit</code> 会调用 <code>mount -a</code>，读取 <code>/etc/fstab</code> 进行挂载：</p>
+<pre><code>&lt;设备&gt; &lt;挂载点&gt; &lt;文件系统&gt; defaults 0  0
+</code></pre>
+<p><strong>建议用UUID代替设备路径</strong>（设备名可能变动）：</p>
+<pre><code>blkid -s UUID &lt;设备文件&gt;
+</code></pre>
+<p>填入：</p>
+<pre><code>UUID=&lt;请填入UUID&gt; &lt;挂载点&gt; auto defaults,nofail 0 2
+</code></pre>
+<h3>4.2 Systemd 方式（.mount 单元）</h3>
+<p>新发行版多用Systemd，虽然也能用 <code>/etc/fstab</code>，但更推荐 <code>.mount</code> 单元。</p>
+<p>获取UUID：</p>
+<pre><code>blkid -s UUID &lt;设备文件&gt;
+</code></pre>
+<p>生成单元文件名：</p>
+<pre><code>systemd-escape -p --suffix=mount &lt;挂载点&gt;
+</code></pre>
+<blockquote>
+<p>例如输出：mnt-data.mount</p>
+</blockquote>
+<p>编辑 <code>/etc/systemd/system/mnt-data.mount</code></p>
+<pre><code>[Unit]
+Description=&lt;看你心情怎么写都可以&gt;
+
+[Mount]
+What=UUID=&lt;请填入UUID&gt;
+Where=/mnt/data
+Type=auto
+Options=defaults
+
+[Install]
+WantedBy=local-fs.target
+</code></pre>
+<p>启用：</p>
+<pre><code>sudo systemctl enable mnt-data.mount
+</code></pre>
+<p>启用并且马上挂载：</p>
+<pre><code>sudo systemctl enable --now mnt-data.mount
+</code></pre>
+<hr />
+<h2>5. 回顾一下</h2>
+<p>Windows 用盘符把硬盘切成独立的盒子，Linux 用一棵目录树消化所有存储设备。</p>
+<p>从 <code>mount</code> 到 <code>/etc/fstab</code> 再到 <code>.mount</code> 单元，本质上都是在做同一件事——<strong>告诉系统"这块硬盘，挂到哪棵树上"</strong>。</p>
+<p>理解了这一点，你就不只是知道了"为什么没有 C 盘"，而是真正理解了 Linux 看待硬件的方式。</p>
+]]></content>
+    <author><name>mineleng博客</name></author>
+    <category term="Linux"/>
+  </entry>
 </feed>

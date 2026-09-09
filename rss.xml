@@ -1,2 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>mineleng博客</title><description>一个初三牲的博客</description><link>https://mcleng.cn/</link><language>zh_CN</language><item><title>你好，世界！</title><link>https://mcleng.cn/posts/hello_world/</link><guid isPermaLink="true">https://mcleng.cn/posts/hello_world/</guid><description>Hello,world !</description><pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;建站第一篇，做个纪念吧&lt;/p&gt;
+</content:encoded></item><item><title>Linux为何没有C盘</title><link>https://mcleng.cn/posts/linux/linux-why-no-c-disk/</link><guid isPermaLink="true">https://mcleng.cn/posts/linux/linux-why-no-c-disk/</guid><description>Linux硬盘管理的方式</description><pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Linux为何没有C盘&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;你是不是也觉得，电脑天生就该有C盘、D盘？其实，这只是Windows给你的错觉。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;1. Windows 是怎么管理硬盘的？&lt;/h2&gt;
+&lt;p&gt;在聊 Linux 之前，先回忆一下 Windows 是怎么管理硬盘的。&lt;/p&gt;
+&lt;p&gt;你买一台新电脑，打开&quot;此电脑&quot;，看到 &lt;strong&gt;C 盘&lt;/strong&gt;、&lt;strong&gt;D 盘&lt;/strong&gt;，可能还有个 &lt;strong&gt;E 盘&lt;/strong&gt;。每个盘有自己的容量、自己的文件，互不干扰。你往 &lt;strong&gt;C 盘&lt;/strong&gt;装系统，往 &lt;strong&gt;D 盘&lt;/strong&gt;存电影，往 &lt;strong&gt;E 盘&lt;/strong&gt;放游戏——清清楚楚。&lt;/p&gt;
+&lt;p&gt;这套方式太深入人心了，以至于很多人默认&quot;电脑就该是这样&quot;。&lt;/p&gt;
+&lt;p&gt;但你可能没想过一个问题：&lt;strong&gt;电脑真的该是这样吗？&lt;/strong&gt; 其实不是的。至少...... Linux不这么认为&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;2. Linux 是怎么管理硬盘的？&lt;/h2&gt;
+&lt;h3&gt;2.1 设备文件&lt;/h3&gt;
+&lt;p&gt;Linux中没有 &lt;strong&gt;盘符&lt;/strong&gt; 的概念，所有硬盘都是 &lt;code&gt;/dev&lt;/code&gt; 下的一个 &lt;strong&gt;设备文件&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SATA/SAS硬盘通常在 &lt;code&gt;/dev/sdX&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;NVMe硬盘通常在 &lt;code&gt;/dev/nvmeX&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;虚拟机磁盘通常在 &lt;code&gt;/dev/vdX&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;2.2 为何没有C盘？&lt;/h3&gt;
+&lt;p&gt;因为Linux使用设备文件而非盘符管理硬盘。Windows用盘符给每块硬盘分配一个独立的&quot;入口&quot;，而Linux把所有设备都挂到同一棵目录树下。&lt;/p&gt;
+&lt;p&gt;你看到的 &lt;code&gt;/&lt;/code&gt;、&lt;code&gt;/home&lt;/code&gt;、&lt;code&gt;/data1&lt;/code&gt; 可能来自完全不同的硬盘，但对用户来说，它们只是路径——没有C，没有D，只有 &lt;code&gt;/&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;你在Linux里 &lt;code&gt;cd /home&lt;/code&gt; 和 &lt;code&gt;cd /data1&lt;/code&gt;，感受不到它们可能来自两块完全不同的物理硬盘——&lt;strong&gt;这就是设计意图&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;3. 挂载硬盘&lt;/h2&gt;
+&lt;p&gt;Linux不像Windows一样开机默认挂载所有可挂载的硬盘。如果想使用硬盘，你需要&lt;strong&gt;挂载&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mount &amp;lt;device&amp;gt; &amp;lt;dir&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;device&amp;gt;&lt;/code&gt; 表示设备文件的路径，通常是分区的设备文件。使用 &lt;code&gt;lsblk&lt;/code&gt; 查看所有硬盘的分区：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda           8:0    0  256G  0 disk
+├─sda1        8:1    0    1G  0 part /boot/efi
+└─sda2        8:2    0  255G  0 part /
+nvme0n1     259:0    0  256G  0 disk
+├─nvme0n1p1 259:1    0    1G  0 part 
+└─nvme0n1p2 259:2    0  255G  0 part
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;挂载示例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo mount /dev/nvme0n1p1 /mnt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：必须用 &lt;code&gt;sudo&lt;/code&gt;，普通用户无法挂载硬盘。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;4. Linux 自动挂载硬盘&lt;/h2&gt;
+&lt;p&gt;使用 &lt;code&gt;mount&lt;/code&gt; 命令挂载无法持久化，重启就会丢失，所以我们需要&lt;strong&gt;开机自动挂载&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3&gt;4.1 SysVinit 方式（/etc/fstab）&lt;/h3&gt;
+&lt;p&gt;传统的 &lt;code&gt;SysVinit&lt;/code&gt; 会调用 &lt;code&gt;mount -a&lt;/code&gt;，读取 &lt;code&gt;/etc/fstab&lt;/code&gt; 进行挂载：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;设备&amp;gt; &amp;lt;挂载点&amp;gt; &amp;lt;文件系统&amp;gt; defaults 0  0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;建议用UUID代替设备路径&lt;/strong&gt;（设备名可能变动）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;blkid -s UUID &amp;lt;设备文件&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;填入：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;UUID=&amp;lt;请填入UUID&amp;gt; &amp;lt;挂载点&amp;gt; auto defaults,nofail 0 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;4.2 Systemd 方式（.mount 单元）&lt;/h3&gt;
+&lt;p&gt;新发行版多用Systemd，虽然也能用 &lt;code&gt;/etc/fstab&lt;/code&gt;，但更推荐 &lt;code&gt;.mount&lt;/code&gt; 单元。&lt;/p&gt;
+&lt;p&gt;获取UUID：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;blkid -s UUID &amp;lt;设备文件&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;生成单元文件名：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;systemd-escape -p --suffix=mount &amp;lt;挂载点&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;例如输出：mnt-data.mount&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;编辑 &lt;code&gt;/etc/systemd/system/mnt-data.mount&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[Unit]
+Description=&amp;lt;看你心情怎么写都可以&amp;gt;
+
+[Mount]
+What=UUID=&amp;lt;请填入UUID&amp;gt;
+Where=/mnt/data
+Type=auto
+Options=defaults
+
+[Install]
+WantedBy=local-fs.target
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;启用：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl enable mnt-data.mount
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;启用并且马上挂载：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl enable --now mnt-data.mount
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;5. 回顾一下&lt;/h2&gt;
+&lt;p&gt;Windows 用盘符把硬盘切成独立的盒子，Linux 用一棵目录树消化所有存储设备。&lt;/p&gt;
+&lt;p&gt;从 &lt;code&gt;mount&lt;/code&gt; 到 &lt;code&gt;/etc/fstab&lt;/code&gt; 再到 &lt;code&gt;.mount&lt;/code&gt; 单元，本质上都是在做同一件事——&lt;strong&gt;告诉系统&quot;这块硬盘，挂到哪棵树上&quot;&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;理解了这一点，你就不只是知道了&quot;为什么没有 C 盘&quot;，而是真正理解了 Linux 看待硬件的方式。&lt;/p&gt;
 </content:encoded></item></channel></rss>
