@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>mineleng博客</title><description>一个初三牲的博客</description><link>https://mcleng.cn/</link><language>zh_CN</language><item><title>你好，世界！</title><link>https://mcleng.cn/posts/hello_world/</link><guid isPermaLink="true">https://mcleng.cn/posts/hello_world/</guid><description>Hello,world !</description><pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;建站第一篇，做个纪念吧&lt;/p&gt;
-</content:encoded></item><item><title>Linux为何没有C盘</title><link>https://mcleng.cn/posts/linux/linux-why-no-c-disk/</link><guid isPermaLink="true">https://mcleng.cn/posts/linux/linux-why-no-c-disk/</guid><description>Linux硬盘管理的方式</description><pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Linux为何没有C盘&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>mineleng博客</title><description>一个初三牲的博客</description><link>https://mcleng.cn/</link><language>zh_CN</language><item><title>Linux为何没有C盘</title><link>https://mcleng.cn/posts/linux/linux-why-no-c-disk/</link><guid isPermaLink="true">https://mcleng.cn/posts/linux/linux-why-no-c-disk/</guid><description>Linux硬盘管理的方式</description><pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Linux为何没有C盘&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;你是不是也觉得，电脑天生就该有C盘、D盘？其实，这只是Windows给你的错觉。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -89,4 +88,5 @@ WantedBy=local-fs.target
 &lt;p&gt;Windows 用盘符把硬盘切成独立的盒子，Linux 用一棵目录树消化所有存储设备。&lt;/p&gt;
 &lt;p&gt;从 &lt;code&gt;mount&lt;/code&gt; 到 &lt;code&gt;/etc/fstab&lt;/code&gt; 再到 &lt;code&gt;.mount&lt;/code&gt; 单元，本质上都是在做同一件事——&lt;strong&gt;告诉系统&quot;这块硬盘，挂到哪棵树上&quot;&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;理解了这一点，你就不只是知道了&quot;为什么没有 C 盘&quot;，而是真正理解了 Linux 看待硬件的方式。&lt;/p&gt;
+</content:encoded></item><item><title>你好，世界！</title><link>https://mcleng.cn/posts/hello_world/</link><guid isPermaLink="true">https://mcleng.cn/posts/hello_world/</guid><description>Hello,world !</description><pubDate>Wed, 09 Sep 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;建站第一篇，做个纪念吧&lt;/p&gt;
 </content:encoded></item></channel></rss>

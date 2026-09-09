@@ -7,18 +7,6 @@
   <id>https://mcleng.cn/</id>
   <updated>2026-09-10T00:00:00.000Z</updated>
   <entry>
-    <title>你好，世界！</title>
-    <link href="https://mcleng.cn/posts/hello_world/" rel="alternate" type="text/html"/>
-    <id>https://mcleng.cn/posts/hello_world/</id>
-    <published>2026-09-10T00:00:00.000Z</published>
-    <updated>2026-09-10T00:00:00.000Z</updated>
-    <summary>Hello,world !</summary>
-    <content type="html"><![CDATA[<p>建站第一篇，做个纪念吧</p>
-]]></content>
-    <author><name>mineleng博客</name></author>
-    <category term="推荐"/>
-  </entry>
-  <entry>
     <title>Linux为何没有C盘</title>
     <link href="https://mcleng.cn/posts/linux/linux-why-no-c-disk/" rel="alternate" type="text/html"/>
     <id>https://mcleng.cn/posts/linux/linux-why-no-c-disk/</id>
@@ -118,5 +106,17 @@ WantedBy=local-fs.target
 ]]></content>
     <author><name>mineleng博客</name></author>
     <category term="Linux"/>
+  </entry>
+  <entry>
+    <title>你好，世界！</title>
+    <link href="https://mcleng.cn/posts/hello_world/" rel="alternate" type="text/html"/>
+    <id>https://mcleng.cn/posts/hello_world/</id>
+    <published>2026-09-09T00:00:00.000Z</published>
+    <updated>2026-09-09T00:00:00.000Z</updated>
+    <summary>Hello,world !</summary>
+    <content type="html"><![CDATA[<p>建站第一篇，做个纪念吧</p>
+]]></content>
+    <author><name>mineleng博客</name></author>
+    <category term="推荐"/>
   </entry>
 </feed>

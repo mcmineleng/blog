@@ -4,18 +4,6 @@
 
 ---
 
-## 你好，世界！
-
-- **URL**: https://mcleng.cn/posts/hello_world/
-- **Published**: 2026-09-10
-- **Category**: 推荐
-- **Tags**: 你好
-- **Description**: Hello,world !
-
-建站第一篇，做个纪念吧
-
----
-
 ## Linux为何没有C盘
 
 - **URL**: https://mcleng.cn/posts/linux/linux-why-no-c-disk/
@@ -148,3 +136,15 @@ Windows 用盘符把硬盘切成独立的盒子，Linux 用一棵目录树消化
 从 `mount` 到 `/etc/fstab` 再到 `.mount` 单元，本质上都是在做同一件事——**告诉系统"这块硬盘，挂到哪棵树上"**。
 
 理解了这一点，你就不只是知道了"为什么没有 C 盘"，而是真正理解了 Linux 看待硬件的方式。
+
+---
+
+## 你好，世界！
+
+- **URL**: https://mcleng.cn/posts/hello_world/
+- **Published**: 2026-09-09
+- **Category**: 推荐
+- **Tags**: 你好
+- **Description**: Hello,world !
+
+建站第一篇，做个纪念吧
