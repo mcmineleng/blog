@@ -4,12 +4,12 @@
 
 ---
 
-## 我的第一篇文章
+## 你好，世界！
 
 - **URL**: https://mcleng.cn/posts/hello_world/
-- **Published**: 2026-08-26
-- **Category**: 写作
-- **Tags**: Astro, 随笔
-- **Description**: 显示在文章列表和元数据中的简短摘要。
+- **Published**: 2026-09-10
+- **Category**: 推荐
+- **Tags**: 你好
+- **Description**: Hello,world !
 
-你好世界
+建站第一篇，做个纪念吧
