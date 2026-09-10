@@ -104,7 +104,7 @@ WantedBy=local-fs.target
 <p>从 <code>mount</code> 到 <code>/etc/fstab</code> 再到 <code>.mount</code> 单元，本质上都是在做同一件事——<strong>告诉系统"这块硬盘，挂到哪棵树上"</strong>。</p>
 <p>理解了这一点，你就不只是知道了"为什么没有 C 盘"，而是真正理解了 Linux 看待硬件的方式。</p>
 ]]></content>
-    <author><name>mineleng博客</name></author>
+    <author><name>mineleng</name></author>
     <category term="Linux"/>
   </entry>
   <entry>
@@ -116,7 +116,7 @@ WantedBy=local-fs.target
     <summary>Hello,world !</summary>
     <content type="html"><![CDATA[<p>建站第一篇，做个纪念吧</p>
 ]]></content>
-    <author><name>mineleng博客</name></author>
+    <author><name>mineleng</name></author>
     <category term="推荐"/>
   </entry>
 </feed>
