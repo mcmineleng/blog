@@ -10,6 +10,7 @@ This is the llms.txt file for mineleng博客. It provides a machine-readable dir
 - [Archive](https://mcleng.cn/archive/): Chronological index of all published writings.
 
 ## Articles
+- [Droidspaces安装教程](https://mcleng.cn/posts/android/droidspaces-install/): Droidspaces安装教程
 - [Linux为何没有C盘](https://mcleng.cn/posts/linux/linux-why-no-c-disk/): Linux硬盘管理的方式
 - [你好，世界！](https://mcleng.cn/posts/hello_world/): Hello,world !
 
