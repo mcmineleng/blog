@@ -8,7 +8,7 @@
 
 - **URL**: https://mcleng.cn/posts/android/droidspaces-install/
 - **Published**: 2026-09-23
-- **Category**: Arch
+- **Category**: Android
 - **Tags**: 软件教程
 - **Description**: Droidspaces安装教程
 
